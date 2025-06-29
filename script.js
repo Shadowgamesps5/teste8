@@ -1,5 +1,4 @@
 let filaLikes = [];
-let ultimaVersao = "";
 
 async function carregarLikes() {
     try {
