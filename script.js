@@ -1,77 +1,48 @@
-const container = document.getElementById("likes-container");
-let likesData = [];
+let lastData = [];
 let currentIndex = 0;
-const maxLikesNaTela = 2;
-let likesAtivos = [];
-let sequenciaTimeout = null;
-let fetchInterval = null;
 
-async function fetchLikes() {
-  try {
-    const response = await fetch("data.json?cache=" + new Date().getTime());
-    const data = await response.json();
-
-    // Se o JSON mudou, reinicia o estado
-    if (JSON.stringify(data) !== JSON.stringify(likesData)) {
-      likesData = data;
-      currentIndex = 0;
-
-      // Limpa likes ativos da tela
-      likesAtivos.forEach(box => {
-        if (container.contains(box)) container.removeChild(box);
-      });
-      likesAtivos = [];
-
-      // Limpa timeouts pendentes
-      if (sequenciaTimeout) clearTimeout(sequenciaTimeout);
-
-      // Começa a exibir a sequência nova
-      iniciarSequencia();
-    }
-  } catch (e) {
-    console.error("Erro ao carregar JSON:", e);
-  }
+function fetchLikes() {
+  fetch("data.json?cache=" + new Date().getTime())
+    .then(response => response.json())
+    .then(data => {
+      if (JSON.stringify(data) !== JSON.stringify(lastData)) {
+        lastData = data;
+        currentIndex = 0;
+        mostrarLikesSequenciais(data);
+      }
+    })
+    .catch(error => console.error("[ERRO] Ao buscar data.json:", error));
 }
 
-function iniciarSequencia() {
-  // Se terminou a lista, não faz nada
-  if (currentIndex >= likesData.length) return;
+function mostrarLikesSequenciais(data) {
+  if (currentIndex >= data.length) return;
 
-  // Se tem espaço na tela, mostra o próximo like
-  if (likesAtivos.length < maxLikesNaTela) {
-    mostrarLike(likesData[currentIndex]);
-    currentIndex++;
-  }
+  const like = data[currentIndex];
+  mostrarLike(like.nome, like.likes);
+  currentIndex++;
 
-  // Programa a próxima chamada da sequência
-  sequenciaTimeout = setTimeout(iniciarSequencia, 750);
+  setTimeout(() => mostrarLikesSequenciais(data), 3000); // espaço entre nomes
 }
 
-function mostrarLike(item) {
-  const box = document.createElement("div");
-  box.className = "like-box";
-  box.innerHTML = `${item.nome} +${item.likes} <span class="heart">❤️</span>`;
-  container.appendChild(box);
-  likesAtivos.push(box);
+function mostrarLike(nome, qtdLikes) {
+  const container = document.getElementById("likes-container");
+  const div = document.createElement("div");
+  div.className = "like-box";
 
-  requestAnimationFrame(() => {
-    box.style.transform = "translateY(-140px)";
-    box.style.opacity = "0";
-  });
+  const texto = document.createTextNode(`${nome} +${qtdLikes}`);
+  const heart = document.createElement("span");
+  heart.className = "heart";
+  heart.textContent = "❤️";
 
-  // Remove após a animação e libera espaço na tela
+  div.appendChild(texto);
+  div.appendChild(heart);
+  container.appendChild(div);
+
   setTimeout(() => {
-    if (container.contains(box)) container.removeChild(box);
-    likesAtivos = likesAtivos.filter(b => b !== box);
-  }, 1700);
+    div.style.opacity = 0;
+    div.style.transform = "translateY(-100px)";
+    setTimeout(() => container.removeChild(div), 1000);
+  }, 5000);
 }
 
-// Começa o fetch repetido a cada 2 segundos
-function iniciarFetchInterval() {
-  if (fetchInterval) clearInterval(fetchInterval);
-  fetchInterval = setInterval(fetchLikes, 2000);
-}
-
-// Inicia a função
-iniciarFetchInterval();
-fetchLikes();
+setInterval(fetchLikes, 4000);
