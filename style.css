@@ -27,9 +27,9 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   white-space: nowrap;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: floatUp 6s ease-in-out forwards;
+  transition: transform 6s ease-in-out, opacity 1s ease;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .heart {
@@ -37,24 +37,11 @@ body {
   animation: beat 1s infinite;
 }
 
-/* Animação de subida suave e saída ao fim */
-@keyframes floatUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
+@keyframes beat {
+  0%, 100% {
+    transform: scale(1);
   }
-  10% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  80% {
-    opacity: 1;
-    transform: translateY(-120px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-140px);
+  50% {
+    transform: scale(1.3);
   }
 }
-
-/* Batimento do coração*
