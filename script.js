@@ -1,12 +1,14 @@
 let filaLikes = [];
+let ultimaVersao = "";
 
 async function carregarLikes() {
     try {
         const res = await fetch('data.json?_=' + new Date().getTime());
-        const data = await res.json();
+        const texto = await res.text();
 
-        // Se a fila estiver vazia, carrega os dados do JSON
-        if (filaLikes.length === 0 && data.length > 0) {
+        if (texto !== ultimaVersao) {
+            ultimaVersao = texto;
+            const data = JSON.parse(texto);
             filaLikes = [...data];
         }
 
@@ -26,14 +28,10 @@ function exibirProximoLike() {
     div.innerHTML = `${item.nome} +${item.likes} <span class="heart">❤️</span>`;
     container.appendChild(div);
 
-    // Remove da tela após a animação (4s)
     setTimeout(() => {
         container.removeChild(div);
     }, 4000);
 }
 
-// Atualiza a fila a cada 4 segundos
 setInterval(carregarLikes, 4000);
-
-// Mostra um novo item da fila a cada 4 segundos
 setInterval(exibirProximoLike, 4000);
