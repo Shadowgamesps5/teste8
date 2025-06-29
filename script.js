@@ -9,7 +9,6 @@ async function fetchLikes() {
     const response = await fetch("data.json?cache=" + new Date().getTime());
     const data = await response.json();
 
-    // Se mudou o array de likes, reseta o índice
     if (JSON.stringify(data) !== JSON.stringify(likesData)) {
       likesData = data;
       currentIndex = 0;
@@ -28,8 +27,7 @@ function iniciarSequencia() {
     currentIndex++;
   }
 
-  // Reexecuta a função após um tempo pra continuar o fluxo
-  setTimeout(iniciarSequencia, 600); // 600ms para entrar o próximo quando o anterior está na metade do caminho
+  setTimeout(iniciarSequencia, 750);
 }
 
 function mostrarLike(item) {
@@ -39,17 +37,15 @@ function mostrarLike(item) {
   container.appendChild(box);
   likesAtivos.push(box);
 
-  // Força renderização antes de aplicar transform para a animação funcionar
   requestAnimationFrame(() => {
     box.style.transform = "translateY(-140px)";
     box.style.opacity = "0";
   });
 
-  // Remove após a transição
   setTimeout(() => {
     container.removeChild(box);
     likesAtivos.shift();
-  }, 1200); // 600ms subir + 600ms sumir (aprox)
+  }, 1700);
 }
 
 // Atualiza o JSON a cada 2 segundos
