@@ -1,32 +1,50 @@
-let filaLikes = [];
-let exibidos = [];
+const likesContainer = document.getElementById("likes-container");
 
-function carregarLikes() {
-  fetch('data.json')
-    .then(response => response.json())
-    .then(data => {
-      data.slice(-10).forEach(item => {
-        const texto = `${item.nome} +${item.likes} ❤️`;
-        if (!filaLikes.includes(texto)) {
-          filaLikes.push(texto);
-        }
-      });
-    });
+let ultimaLista = [];
+let indiceAtual = 0;
+
+async function buscarLikes() {
+  try {
+    const response = await fetch("https://raw.githubusercontent.com/Shadowgamesps5/teste8/main/data.json?" + new Date().getTime());
+    const data = await response.json();
+
+    // Só atualiza se mudou o conteúdo
+    const novoJson = JSON.stringify(data);
+    const ultimoJson = JSON.stringify(ultimaLista);
+
+    if (novoJson !== ultimoJson) {
+      ultimaLista = data;
+      indiceAtual = 0;
+    }
+  } catch (error) {
+    console.error("Erro ao buscar likes:", error);
+  }
 }
 
-function exibirLike() {
-  if (filaLikes.length === 0) return;
+function criarLikeBox(nome, qtd) {
+  const likeBox = document.createElement("div");
+  likeBox.className = "like-box";
 
-  const container = document.getElementById("likes-container");
-  const div = document.createElement("div");
-  div.className = "like-box";
-  div.innerText = filaLikes.shift();
-  container.appendChild(div);
+  const texto = document.createTextNode(`${nome} +${qtd}`);
+  const heart = document.createElement("span");
+  heart.className = "heart";
+  heart.textContent = "❤️";
+
+  likeBox.appendChild(texto);
+  likeBox.appendChild(heart);
+  likesContainer.appendChild(likeBox);
 
   setTimeout(() => {
-    div.remove();
-  }, 5000); // Cada nome dura 5 segundos
+    likeBox.remove();
+  }, 8000); // Remove após a animação de 8s
 }
 
-setInterval(carregarLikes, 2000);  // Atualiza dados do JSON
-setInterval(exibirLike, 300);      // Exibe um novo nome a cada 300ms
+setInterval(async () => {
+  await buscarLikes();
+
+  if (indiceAtual < ultimaLista.length) {
+    const like = ultimaLista[indiceAtual];
+    criarLikeBox(like.nome, like.likes);
+    indiceAtual++;
+  }
+}, 2000); // ⏱️ Mostra 1 nome novo a cada 2 segundos
