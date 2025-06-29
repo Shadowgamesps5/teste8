@@ -1,52 +1,55 @@
 body {
   margin: 0;
+  padding: 0;
+  background: transparent;
   overflow: hidden;
-  background-color: transparent;
   font-family: Arial, sans-serif;
 }
 
-#container {
+#likes-container {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .like-box {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0); /* transparente */
-  border: 2px solid white;
-  border-radius: 12px;
-  color: white;
-  font-size: 24px;
-  padding: 8px 14px;
+  justify-content: center;
+  font-size: 22px;
+  padding: 5px 10px;
   margin-bottom: 2px;
-  animation: subir 5s linear forwards;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.3); /* Transparente */
+  color: white;
+  animation: floatUp 5s linear forwards;
 }
 
-@keyframes subir {
-  0% {
+.heart {
+  margin-left: 8px;
+  animation: beat 1s infinite;
+}
+
+@keyframes floatUp {
+  from {
     transform: translateY(0);
     opacity: 1;
   }
-  80% {
-    transform: translateY(-80vh);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh);
+  to {
+    transform: translateY(-400px);
     opacity: 0;
   }
 }
 
-.heart {
-  color: red;
-  animation: bater 1s infinite;
-}
-
-@keyframes bater {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.4); }
+@keyframes beat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
 }
