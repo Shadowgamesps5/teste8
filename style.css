@@ -13,7 +13,7 @@ body {
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
 }
 
 .like-box {
@@ -21,14 +21,14 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  padding: 5px 10px;
+  padding: 6px 12px;
   margin-bottom: 2px;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3); /* Transparente com fundo suave */
   color: white;
-  animation: floatUp 5s ease-in-out forwards;
+  animation: floatUp 8s ease-in-out forwards;
   white-space: nowrap;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .heart {
@@ -37,29 +37,33 @@ body {
 }
 
 @keyframes floatUp {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-400px);
-    opacity: 0;
-  }
-}
-
-@keyframes floatUp {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
   }
   10% {
+    opacity: 1;
+    transform: translateY(30px);
+  }
+  50% {
+    transform: translateY(-50px);
     opacity: 1;
   }
   90% {
     opacity: 1;
+    transform: translateY(-120px);
   }
   100% {
     opacity: 0;
-    transform: translateY(-100px);
+    transform: translateY(-150px);
+  }
+}
+
+@keyframes beat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
   }
 }
