@@ -15,8 +15,12 @@ body {
 }
 
 .like-box {
-    background-color: transparent;  /* Torna a caixinha transparente */
-    /* outros estilos */
+    background-color: transparent;  /* Remove a cor de fundo azul */
+    color: #fff;  /* Ajuste a cor do texto se necessário */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);  /* Caso queira um sombreado leve */
 }
 
 .heart {
