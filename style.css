@@ -1,63 +1,52 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 100vh;
-    margin: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: transparent;
+  font-family: Arial, sans-serif;
 }
 
-#like-container {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
+#container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .like-box {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    padding: 10px 20px;
-    margin-bottom: 2mm;
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    position: relative;
-    animation: subir 4s ease-out forwards;
-}
-
-.heart {
-    font-size: 25px;
-    margin-left: 5px;
-    animation: pulse 1s infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0); /* transparente */
+  border: 2px solid white;
+  border-radius: 12px;
+  color: white;
+  font-size: 24px;
+  padding: 8px 14px;
+  margin-bottom: 2px;
+  animation: subir 5s linear forwards;
 }
 
 @keyframes subir {
-    0% {
-        transform: translateY(0);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(-50px);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-80vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 0.6;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+.heart {
+  color: red;
+  animation: bater 1s infinite;
+}
+
+@keyframes bater {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.4); }
 }
