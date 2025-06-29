@@ -8,53 +8,7 @@
 </head>
 <body>
   <div id="likes-container"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
-
-<script>
-  let likesData = [];
-  let currentIndex = 0;
-  const container = document.getElementById("likes-container");
-
-  async function fetchLikes() {
-    try {
-      const response = await fetch("data.json");
-      const data = await response.json();
-      if (JSON.stringify(data) !== JSON.stringify(likesData)) {
-        likesData = data;
-        currentIndex = 0;
-      }
-    } catch (e) {
-      console.error("Erro ao carregar JSON:", e);
-    }
-  }
-
-  function exibirLike(item) {
-    const box = document.createElement("div");
-    box.className = "like-box";
-    box.innerHTML = `${item.nome} +${item.likes} <span class="heart">❤️</span>`;
-    container.appendChild(box);
-
-    setTimeout(() => {
-      box.style.opacity = "0";
-      box.style.transform = "translateY(-140px)";
-    }, 5000);
-
-    setTimeout(() => {
-      container.removeChild(box);
-    }, 6000);
-  }
-
-  function loop() {
-    if (likesData.length > 0) {
-      if (currentIndex < likesData.length) {
-        exibirLike(likesData[currentIndex]);
-        currentIndex++;
-      }
-    }
-  }
-
-  setInterval(fetchLikes, 2000);     // Atualiza JSON a cada 2s
-  setInterval(loop, 1500);           // Mostra 1 item novo a cada 1.5s
-</script>
