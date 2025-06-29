@@ -1,21 +1,22 @@
 let filaLikes = [];
-let exibindo = false;
+let exibidos = [];
 
 function carregarLikes() {
   fetch('data.json')
     .then(response => response.json())
     .then(data => {
-      // Sempre adiciona os últimos nomes ao fim da fila
       data.slice(-10).forEach(item => {
-        filaLikes.push(`${item.nome} +${item.likes} ❤️`);
+        const texto = `${item.nome} +${item.likes} ❤️`;
+        if (!filaLikes.includes(texto)) {
+          filaLikes.push(texto);
+        }
       });
     });
 }
 
-function exibirUmPorVez() {
-  if (exibindo || filaLikes.length === 0) return;
+function exibirLike() {
+  if (filaLikes.length === 0) return;
 
-  exibindo = true;
   const container = document.getElementById("likes-container");
   const div = document.createElement("div");
   div.className = "like-box";
@@ -24,9 +25,8 @@ function exibirUmPorVez() {
 
   setTimeout(() => {
     div.remove();
-    exibindo = false;
-  }, 5000); // Duração total do efeito
+  }, 5000); // Cada nome dura 5 segundos
 }
 
-setInterval(carregarLikes, 2000);   // Busca novos dados
-setInterval(exibirUmPorVez, 300);   // Mostra 1 nome por vez
+setInterval(carregarLikes, 2000);  // Atualiza dados do JSON
+setInterval(exibirLike, 300);      // Exibe um novo nome a cada 300ms
