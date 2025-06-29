@@ -24,9 +24,10 @@ body {
   padding: 5px 10px;
   margin-bottom: 2px;
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.3); /* Transparente */
+  background-color: rgba(0, 0, 0, 0.3);
   color: white;
-  animation: floatUp 5s linear forwards;
+  animation: floatUp 5s ease-out forwards;
+  white-space: nowrap;
 }
 
 .heart {
