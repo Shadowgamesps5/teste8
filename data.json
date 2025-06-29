@@ -20,32 +20,12 @@
     "likes": 830
   },
   {
-    "nome": "Example User 1",
-    "likes": 15005
+    "nome": "Example User 6",
+    "likes": 125
   },
   {
-    "nome": "Example User 2",
-    "likes": 10536
-  },
-  {
-    "nome": "Example User 1",
-    "likes": 15005
-  },
-  {
-    "nome": "Example User 1",
-    "likes": 15005
-  },
-  {
-    "nome": "Example User 2",
-    "likes": 10536
-  },
-  {
-    "nome": "Example User 3",
-    "likes": 7056
-  },
-  {
-    "nome": "Example User 4",
-    "likes": 1533
+    "nome": "Example User 7",
+    "likes": 90
   },
   {
     "nome": "Example User 1",
@@ -70,5 +50,65 @@
   {
     "nome": "Example User 6",
     "likes": 125
+  },
+  {
+    "nome": "Example User 7",
+    "likes": 90
+  },
+  {
+    "nome": "Example User 1",
+    "likes": 15005
+  },
+  {
+    "nome": "Example User 2",
+    "likes": 10536
+  },
+  {
+    "nome": "Example User 3",
+    "likes": 7056
+  },
+  {
+    "nome": "Example User 4",
+    "likes": 1533
+  },
+  {
+    "nome": "Example User 5",
+    "likes": 830
+  },
+  {
+    "nome": "Example User 6",
+    "likes": 125
+  },
+  {
+    "nome": "Example User 7",
+    "likes": 90
+  },
+  {
+    "nome": "Example User 1",
+    "likes": 15005
+  },
+  {
+    "nome": "Example User 2",
+    "likes": 10536
+  },
+  {
+    "nome": "Example User 3",
+    "likes": 7056
+  },
+  {
+    "nome": "Example User 4",
+    "likes": 1533
+  },
+  {
+    "nome": "Example User 5",
+    "likes": 830
+  },
+  {
+    "nome": "Example User 6",
+    "likes": 125
+  },
+  {
+    "nome": "Example User 7",
+    "likes": 90
   }
 ]
