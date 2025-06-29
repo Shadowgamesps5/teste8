@@ -33,7 +33,7 @@ body {
 
 .heart {
   margin-left: 8px;
-  animation: beat 1s infinite;
+  animation: floatUp 10s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes floatUp {
