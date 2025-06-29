@@ -1,0 +1,14 @@
+[
+    {
+        "nome": "Pessoa 1",
+        "likes": 150
+    },
+    {
+        "nome": "Pessoa 2",
+        "likes": 200
+    },
+    {
+        "nome": "Pessoa 3",
+        "likes": 75
+    }
+]
