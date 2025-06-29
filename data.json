@@ -6,5 +6,9 @@
     {
         "nome": "Example User 2",
         "likes": 10536
+    },
+    {
+        "nome": "Example User 3",
+        "likes": 7056
     }
 ]
