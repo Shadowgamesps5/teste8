@@ -10,5 +10,9 @@
     {
         "nome": "Example User 3",
         "likes": 7056
+    },
+    {
+        "nome": "Example User 4",
+        "likes": 1533
     }
 ]
