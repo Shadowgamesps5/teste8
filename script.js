@@ -1,23 +1,32 @@
-let lastData = [];
+let filaLikes = [];
+let exibindo = false;
 
 function carregarLikes() {
   fetch('data.json')
     .then(response => response.json())
     .then(data => {
-      // Evita repetição se os dados forem idênticos
-      if (JSON.stringify(data) === JSON.stringify(lastData)) return;
-      lastData = data;
-
-      const container = document.getElementById("likes-container");
-      container.innerHTML = "";
-
+      // Sempre adiciona os últimos nomes ao fim da fila
       data.slice(-10).forEach(item => {
-        const div = document.createElement("div");
-        div.className = "like-box";
-        div.innerHTML = `${item.nome} +${item.likes} <span class="heart">❤️</span>`;
-        container.appendChild(div);
+        filaLikes.push(`${item.nome} +${item.likes} ❤️`);
       });
     });
 }
 
-setInterval(carregarLikes, 2000);
+function exibirUmPorVez() {
+  if (exibindo || filaLikes.length === 0) return;
+
+  exibindo = true;
+  const container = document.getElementById("likes-container");
+  const div = document.createElement("div");
+  div.className = "like-box";
+  div.innerText = filaLikes.shift();
+  container.appendChild(div);
+
+  setTimeout(() => {
+    div.remove();
+    exibindo = false;
+  }, 5000); // Duração total do efeito
+}
+
+setInterval(carregarLikes, 2000);   // Busca novos dados
+setInterval(exibirUmPorVez, 300);   // Mostra 1 nome por vez
