@@ -1,6 +1,5 @@
 let filaLikes = [];
 let ultimaVersao = "";
-let exibindo = false;
 
 async function carregarLikes() {
     try {
@@ -12,7 +11,6 @@ async function carregarLikes() {
             const data = JSON.parse(texto);
             filaLikes.push(...data); // adiciona os novos ao final da fila
         }
-
     } catch (error) {
         console.error("Erro ao carregar JSON:", error);
     }
