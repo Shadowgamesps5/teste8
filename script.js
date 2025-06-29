@@ -1,29 +1,23 @@
-const container = document.getElementById("container");
+let lastData = [];
 
-async function carregarLikes() {
-  try {
-    const resposta = await fetch("data.json");
-    const dados = await resposta.json();
+function carregarLikes() {
+  fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+      // Evita repetição se os dados forem idênticos
+      if (JSON.stringify(data) === JSON.stringify(lastData)) return;
+      lastData = data;
 
-    dados.slice(-10).forEach((item, index) => {
-      setTimeout(() => {
-        mostrarLike(item.nome, item.likes);
-      }, index * 800); // espaço de 0.8s entre cada nome
+      const container = document.getElementById("likes-container");
+      container.innerHTML = "";
+
+      data.slice(-10).forEach(item => {
+        const div = document.createElement("div");
+        div.className = "like-box";
+        div.innerHTML = `${item.nome} +${item.likes} <span class="heart">❤️</span>`;
+        container.appendChild(div);
+      });
     });
-  } catch (erro) {
-    console.error("Erro ao carregar likes:", erro);
-  }
 }
 
-function mostrarLike(nome, likes) {
-  const box = document.createElement("div");
-  box.className = "like-box";
-  box.innerHTML = `${nome} +${likes} <span class="heart">❤️</span>`;
-  container.appendChild(box);
-
-  setTimeout(() => {
-    container.removeChild(box);
-  }, 5000);
-}
-
-setInterval(carregarLikes, 6000);
+setInterval(carregarLikes, 2000);
